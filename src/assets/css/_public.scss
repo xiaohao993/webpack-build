@@ -1,0 +1,113 @@
+#dreambox{
+	width: 100%;
+	height: 100%;
+	background: $defaultBg;
+	position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.section{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    // overflow: hidden;
+
+    z-index: 2;
+
+    display: none;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.flexbox{
+    display: flex;
+}
+
+
+
+
+
+
+
+/*****************************
+* 常用
+*****************************/
+
+.ycenter{
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.hidden {
+    display: none;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.show {
+    display: inline-block;
+    visibility: visible;
+    opacity: 1;
+}
+
+.transition {
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+    -webkit-animation-duration: .3s;
+    animation-duration: .3s;
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+
+
+
+
+
+
+
+
+/*****************************
+* 媒体查询
+*****************************/
+
+/* 6plus */
+@media only screen and (min-device-width: 414px) and (max-device-width: 736px) and (orientation: portrait) {
+
+}
+
+/* 6 */
+@media only screen and (min-device-width: 375px) and (max-device-width: 410px) and (orientation: portrait) {
+
+}
+
+/* 5s */
+@media handheld and (min-height:490px),screen and (max-height:510px) {
+
+}
+
+/* 4s */
+
+@media handheld and (min-height:400px),screen and (max-height:420px) {
+
+}
+
+
+

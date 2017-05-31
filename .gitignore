@@ -1,0 +1,6 @@
+# Ignore configuration files that may contain sensitive information.
+.DS_Store
+
+build/
+node_modules/
+

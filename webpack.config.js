@@ -5,12 +5,21 @@ const path = require('path'),
 	  CleanWebpackPlugin = require('clean-webpack-plugin'),
 	  tinypngCompress = require('webpack-tinypng-compress');
 
+/**
+ * Env
+ * Get npm lifecycle event to identify the environment
+ */
+const ENV = process.env.npm_lifecycle_event;
+
+const tpKey = "x_6kBmY-hoXpd7Eg9CchBpFVVH5L9yIf";
+
+
 const extractPlugin = new ExtractTextPlugin({
-		filename:  (getPath) => {
-			return getPath('css/[name].css').replace('css/js', 'css');
-		},
-		allChunks: true
-	  });
+	filename:  (getPath) => {
+		return getPath('css/[name].css').replace('css/js', 'css');
+	},
+	allChunks: true
+});
 
 const PATHS = {
 	source: path.join(__dirname, 'src'),
@@ -18,15 +27,14 @@ const PATHS = {
 };
 
 const chunksOrder = function(chunk1, chunk2){   // js/css 插入页面的顺序设定
-		var order = ['base', 'index', 'blog'];
-		var order1 = order.indexOf(chunk1.names[0]);
-		var order2 = order.indexOf(chunk2.names[0]);
-		return order1 - order2;
-	  };
+	var order = ['base', 'index', 'blog'];
+	var order1 = order.indexOf(chunk1.names[0]);
+	var order2 = order.indexOf(chunk2.names[0]);
+	return order1 - order2;
+};
 
-const tpKey = "x_6kBmY-hoXpd7Eg9CchBpFVVH5L9yIf";
 
-module.exports = {
+const config = {
 	devtool: "source-map",  //配置生成Source Maps，选择合适的选项
 	entry: {
 		'base': PATHS.source + '/assets/js/base.js',          // 主体共享js
@@ -44,10 +52,6 @@ module.exports = {
 			jQuery: 'jquery'
 		}),
 		extractPlugin,
-		new tinypngCompress({
-			key: tpKey,
-			relativePath: PATHS.build + '/img'  //is relative path to output.puth 
-		}),
 		new HtmlWebpackPlugin({
 			filename: 'index.html',
 			chunks: ['base', 'index'],
@@ -66,7 +70,6 @@ module.exports = {
 			showErrors: true,       // 是否将错误信息输出到html页面中
 			hash: true 
 		}),
-		//new CleanWebpackPlugin([PATHS.build])
 	],
 	module: {
 		rules: [
@@ -140,8 +143,20 @@ module.exports = {
 
 
 
+// 编译环境判断
+if(ENV === 'build'||ENV === 'build:prod'){
+	config.plugins = config.plugins.concat([
+		new tinypngCompress({
+			key: tpKey,
+			relativePath: PATHS.build + '/img'  //is relative path to output.puth 
+		}),
+		new CleanWebpackPlugin([PATHS.build])
+	]);
+	//console.log(config);
+}
 
 
 
 
+module.exports = config;
 

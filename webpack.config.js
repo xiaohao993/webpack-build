@@ -5,10 +5,7 @@ const path = require('path'),
 	  CleanWebpackPlugin = require('clean-webpack-plugin'),
 	  tinypngCompress = require('webpack-tinypng-compress');
 
-/**
- * Env
- * Get npm lifecycle event to identify the environment
- */
+
 const ENV = process.env.npm_lifecycle_event;
 
 const tpKey = "x_6kBmY-hoXpd7Eg9CchBpFVVH5L9yIf";

@@ -159,7 +159,7 @@ const config = {
 				}]
 			},
 			{
-				test: /\.(jpng|png|gif|jpg|jpeg|svg)$/,
+				test: /\.(png|gif|jpe?g|svg)$/,
 				use: [
 					// {
 					// 	loader: 'file-loader',
@@ -202,7 +202,7 @@ if(ENV === 'build'||ENV === 'build:prod'){
 	], configCustom.getPlugins());
 	//console.log(config);
 }else{
-
+	config.plugins = config.plugins.concat(configCustom.getPlugins());
 }
 
 

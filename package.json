@@ -23,6 +23,7 @@
     "node-sass": "^4.5.3",
     "postcss-loader": "^2.0.5",
     "sass-loader": "^6.0.5",
+    "steamer-webpack-utils": "^1.0.2",
     "tinypng-loader": "^1.0.4",
     "url-loader": "^0.5.8",
     "webpack": "^2.6.1",

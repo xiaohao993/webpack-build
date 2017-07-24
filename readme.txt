@@ -3,9 +3,13 @@
 
 npm install
 
+npm run build             // 简单整合
+
 npm run build:prod        // webpack -p  最终压缩整合
 
-npm start    // 启动热加载 (手动打开 http://localhost:8080/ )
+npm start                 // 启动热加载 (手动打开 http://localhost:8080/ )
+
+http-server -c-l   build/    启动http-server,预览发布代码
 
 
 

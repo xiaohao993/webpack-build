@@ -39,7 +39,7 @@ const configCustom = {
 	webpack: {
 		html: utils.filterHtmlFileByCmd(utils.getHtmlEntry({
 	        srcPath: path.join(PATHS.source, "pages"),
-	        level: 1
+	        level: 1   // 0 表示在当前目录寻找，1 表示在下一级目录寻找
 	    }))
 	},
 	getPlugins: function(){
@@ -126,14 +126,14 @@ const config = {
 					{
 						loader: 'babel-loader',
 						options: {
-							presets: ['es2015'],
+							presets: ['es2015', 'es2017'],
 							sourceMap: true
 						}
 					}
 				]
 			},
 			{
-				test: /\.(css|scss$)/,
+				test: /\.(css|s(a|c)ss$)/,
 				use: extractPlugin.extract({
 					use: [{
 						loader: 'css-loader'
@@ -154,12 +154,12 @@ const config = {
 				use: [{
 					loader: 'html-loader',
 					options: {
-						minimize: false     // 是否压缩
+						minimize: false,     // 是否压缩
 					}
 				}]
 			},
 			{
-				test: /\.(png|gif|jpe?g|svg)$/,
+				test: /\.(png|gif|jpe?g|svg)$/i,
 				use: [
 					// {
 					// 	loader: 'file-loader',
@@ -176,7 +176,7 @@ const config = {
 							limit: 1000,
 							name: '[name].[ext]',
 							outputPath: 'img/',
-							publicPath: '/build/'
+							publicPath: '../'
 						}
 					}
 				]
@@ -191,16 +191,16 @@ const config = {
 
 
 // 编译环境判断
-if(ENV === 'build'||ENV === 'build:prod'){
+if(ENV === 'build:prod'){
 	config.devtool = "source-map";  //配置生成Source Maps，选择合适的选项
-	config.plugins = config.plugins.concat([
+	config.plugins = config.plugins.concat(configCustom.getPlugins(), [
 		new tinypngCompress({
 			key: tpKey,
+			//relativePath: path.resolve(__dirname, 'build/img') //is relative path to output.puth 
 			relativePath: PATHS.build + '/img'  //is relative path to output.puth 
 		}),
 		new CleanWebpackPlugin([PATHS.build])
-	], configCustom.getPlugins());
-	//console.log(config);
+	]);
 }else{
 	config.plugins = config.plugins.concat(configCustom.getPlugins());
 }
